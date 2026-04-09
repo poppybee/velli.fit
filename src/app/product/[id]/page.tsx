@@ -1,14 +1,14 @@
 'use client';
 
-import React, { useState, use } from 'react';
+import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import ProductGallery from '@/components/ProductGallery';
 import SizeSelector from '@/components/SizeSelector';
 import { trendingProducts } from '@/data/mockData';
 import { Heart, ShoppingBag, ShieldCheck, Truck, RotateCcw } from 'lucide-react';
 
-export default function ProductDetail({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
+export default function ProductDetail({ params }: { params: { id: string } }) {
+  const { id } = params;
   const product = trendingProducts.find(p => p.id === id) || trendingProducts[0];
   const [selectedSize, setSelectedSize] = useState('M');
 
@@ -24,26 +24,26 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
       <Navbar />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-black">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 text-left">
           <ProductGallery images={productImages} />
 
           <div className="flex flex-col">
             <div className="mb-8">
-              <div className="flex items-center gap-2 mb-4 text-emerald-600 font-bold text-sm uppercase tracking-widest text-left">
+              <div className="flex items-center gap-2 mb-4 text-emerald-600 font-bold text-sm uppercase tracking-widest">
                 <span>New Arrival</span>
                 <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
                 <span>{product.category}</span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-black tracking-tighter text-black mb-4 text-left uppercase">
+              <h1 className="text-4xl md:text-5xl font-black tracking-tighter text-black mb-4 uppercase">
                 {product.name}
               </h1>
               <div className="flex items-center gap-4 mb-6">
                 <span className="text-3xl font-bold text-black">${product.price.toLocaleString()}</span>
-                <span className="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-lg uppercase text-left">
+                <span className="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-lg uppercase">
                   Free Shipping
                 </span>
               </div>
-              <p className="text-gray-500 leading-relaxed font-medium text-left">
+              <p className="text-gray-500 leading-relaxed font-medium">
                 Engineered for high-intensity training, this sports bra offers maximum support without sacrificing breathability. Featuring our AeroStretch™ technology, it provides a second-skin feel that keeps you cool and dry.
               </p>
             </div>
@@ -55,7 +55,7 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
             />
 
             <div className="flex gap-4 mb-12">
-              <button className="flex-1 h-16 bg-black text-white rounded-2xl font-bold text-lg hover:bg-emerald-600 transition-colors flex items-center justify-center gap-3">
+              <button className="flex-1 h-16 bg-black text-white rounded-2xl font-bold text-lg hover:bg-emerald-600 transition-colors flex items-center justify-center gap-3 uppercase tracking-widest">
                 <ShoppingBag size={20} />
                 Add to Cart
               </button>
