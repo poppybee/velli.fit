@@ -1,7 +1,9 @@
+'use client';
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
-import { Link } from 'next/link';
+import Link from 'next/link';
 
 export default function SuccessPage() {
   return (
@@ -20,7 +22,7 @@ export default function SuccessPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="text-4xl font-black tracking-tighter mb-4 text-black"
+          className="text-4xl font-black tracking-tighter mb-4 text-black uppercase"
         >
           Payment Successful!
         </motion.h1>
@@ -42,11 +44,11 @@ export default function SuccessPage() {
         >
           <Link
             href="/"
-            className="w-full h-14 bg-black text-white rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-emerald-600 transition-colors text-center"
+            className="w-full h-14 bg-black text-white rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-emerald-600 transition-colors text-center uppercase tracking-widest"
           >
             Back to Home
           </Link>
-          <button className="w-full h-14 bg-gray-50 text-gray-900 rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-gray-100 transition-colors">
+          <button className="w-full h-14 bg-gray-50 text-gray-900 rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-gray-100 transition-colors uppercase tracking-widest">
             Order Details
           </button>
         </motion.div>
