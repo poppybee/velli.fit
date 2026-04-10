@@ -15,9 +15,9 @@ export default function Navbar() {
             </Link>
             <div className="hidden md:flex gap-6 text-sm font-medium text-gray-600 uppercase tracking-widest">
               <Link href="/" className="hover:text-emerald-500 transition-colors">Shop All</Link>
-              <Link href="/" className="hover:text-emerald-500 transition-colors">Yoga</Link>
-              <Link href="/" className="hover:text-emerald-500 transition-colors">Running</Link>
-              <Link href="/" className="hover:text-emerald-500 transition-colors">New Arrivals</Link>
+              <Link href="/" className="hover:text-emerald-500 transition-colors">New Collection</Link>
+              <Link href="/" className="hover:text-emerald-500 transition-colors">Shop By</Link>
+              <Link href="/" className="hover:text-emerald-500 transition-colors">Sports</Link>
             </div>
           </div>
           <div className="flex items-center gap-5">
