@@ -53,6 +53,3 @@ export const trendingProducts = [
     rating: 4.9,
   },
 ];
-ng: 4.8,
-  },
-];
