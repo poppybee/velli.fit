@@ -11,7 +11,7 @@ export default function Hero() {
       {/* Full-bleed background */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1616803689943-5601631c7fec?w=1800&q=85&fit=crop&crop=top"
+          src="https://sc02.alicdn.com/kf/A56370790ea01488eb613c55e42c73604g.png"
           alt="VELLI activewear hero"
           className="w-full h-full object-cover object-top"
         />

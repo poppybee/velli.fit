@@ -85,7 +85,7 @@ export default function Home() {
       {/* Brand Ethos — full bleed */}
       <section className="relative overflow-hidden">
         <img
-          src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1800&q=80&fit=crop&crop=center"
+          src="https://sc02.alicdn.com/kf/A17c219c5f8bb453cabf4d47369a47dc42.png"
           alt="VELLI brand"
           className="w-full h-[70vh] object-cover object-center"
         />
