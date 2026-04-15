@@ -6,33 +6,33 @@ import Link from 'next/link';
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-black">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-md border-b border-white/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <div className="flex items-center gap-8">
-            <Link href="/" className="text-2xl font-bold tracking-tighter">
-              VELLI<span className="text-emerald-500">.</span>
+          <div className="flex items-center gap-10">
+            <Link href="/" className="text-2xl font-black tracking-tighter text-white">
+              VELLI<span className="text-emerald-400">.</span>
             </Link>
-            <div className="hidden md:flex gap-6 text-sm font-medium text-gray-600 uppercase tracking-widest">
-              <Link href="/" className="hover:text-emerald-500 transition-colors">Shop All</Link>
-              <Link href="/" className="hover:text-emerald-500 transition-colors">New Collection</Link>
-              <Link href="/" className="hover:text-emerald-500 transition-colors">Shop By</Link>
-              <Link href="/" className="hover:text-emerald-500 transition-colors">Sports</Link>
+            <div className="hidden md:flex gap-7 text-xs font-bold text-white/60 uppercase tracking-widest">
+              <Link href="/" className="hover:text-emerald-400 transition-colors">Shop All</Link>
+              <Link href="/" className="hover:text-emerald-400 transition-colors">New Collection</Link>
+              <Link href="/" className="hover:text-emerald-400 transition-colors">Shop By</Link>
+              <Link href="/" className="hover:text-emerald-400 transition-colors">Sports</Link>
             </div>
           </div>
           <div className="flex items-center gap-5">
-            <button className="text-gray-600 hover:text-black transition-colors p-2">
-              <Search size={20} />
+            <button className="text-white/60 hover:text-white transition-colors p-2">
+              <Search size={18} />
             </button>
-            <Link href="/account" className="text-gray-600 hover:text-black transition-colors p-2">
-              <User size={20} />
+            <Link href="/account" className="text-white/60 hover:text-white transition-colors p-2">
+              <User size={18} />
             </Link>
-            <Link href="/cart" className="text-gray-600 hover:text-black transition-colors p-2 relative">
-              <ShoppingBag size={20} />
-              <span className="absolute top-1 right-1 w-2 h-2 bg-emerald-500 rounded-full border-2 border-white"></span>
+            <Link href="/cart" className="text-white/60 hover:text-white transition-colors p-2 relative">
+              <ShoppingBag size={18} />
+              <span className="absolute top-1 right-1 w-2 h-2 bg-emerald-400 rounded-full"></span>
             </Link>
-            <button className="md:hidden text-gray-600 p-2">
-              <Menu size={20} />
+            <button className="md:hidden text-white/60 p-2">
+              <Menu size={18} />
             </button>
           </div>
         </div>
