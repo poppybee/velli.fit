@@ -30,8 +30,12 @@ export type Product = {
 };
 
 export function getProducts(): Product[] {
-  const raw = fs.readFileSync(filePath, 'utf-8');
-  return JSON.parse(raw);
+  try {
+    const raw = fs.readFileSync(filePath, 'utf-8');
+    return JSON.parse(raw);
+  } catch {
+    return [];
+  }
 }
 
 export function getProduct(id: string): Product | null {

@@ -21,7 +21,9 @@ export default function AdminLogin() {
     if (res.ok) {
       router.push('/admin/products');
     } else {
-      setError('Incorrect password.');
+      const text = await res.text();
+      setError(`Incorrect password. (${res.status})`);
+      console.error('Login failed:', text);
     }
     setLoading(false);
   };
