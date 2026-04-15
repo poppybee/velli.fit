@@ -1,0 +1,86 @@
+[
+  {
+    "id": "1",
+    "name": "Sky Blue Seamless Sports Bra",
+    "description": "Lightweight seamless sports bra with medium support, perfect for yoga and pilates.",
+    "price": 38.00,
+    "comparePrice": null,
+    "category": "Yoga",
+    "status": "active",
+    "images": [
+      { "url": "https://sc02.alicdn.com/kf/Af42939298c43422aad0a8d51f5817b10C.png", "alt": "Sky Blue Sports Bra front" }
+    ],
+    "skus": [
+      { "id": "sku-1-xs", "size": "XS", "color": "Sky Blue", "stock": 10 },
+      { "id": "sku-1-s",  "size": "S",  "color": "Sky Blue", "stock": 25 },
+      { "id": "sku-1-m",  "size": "M",  "color": "Sky Blue", "stock": 30 },
+      { "id": "sku-1-l",  "size": "L",  "color": "Sky Blue", "stock": 20 },
+      { "id": "sku-1-xl", "size": "XL", "color": "Sky Blue", "stock": 10 }
+    ],
+    "rating": 4.8,
+    "createdAt": "2026-04-15T00:00:00Z"
+  },
+  {
+    "id": "2",
+    "name": "Sage Yoga Shorts",
+    "description": "High-waist yoga shorts with a buttery-soft fabric and secure waistband.",
+    "price": 52.00,
+    "comparePrice": null,
+    "category": "Yoga",
+    "status": "active",
+    "images": [
+      { "url": "https://sc02.alicdn.com/kf/A73cf9e7b72ff4847baf80b5e61729537W.png", "alt": "Sage Yoga Shorts front" }
+    ],
+    "skus": [
+      { "id": "sku-2-xs", "size": "XS", "color": "Sage Green", "stock": 8 },
+      { "id": "sku-2-s",  "size": "S",  "color": "Sage Green", "stock": 20 },
+      { "id": "sku-2-m",  "size": "M",  "color": "Sage Green", "stock": 25 },
+      { "id": "sku-2-l",  "size": "L",  "color": "Sage Green", "stock": 15 },
+      { "id": "sku-2-xl", "size": "XL", "color": "Sage Green", "stock": 8 }
+    ],
+    "rating": 4.9,
+    "createdAt": "2026-04-15T00:00:00Z"
+  },
+  {
+    "id": "3",
+    "name": "White Pleated Tennis Skirt",
+    "description": "Chic pleated tennis skirt with built-in shorts and side pockets.",
+    "price": 68.00,
+    "comparePrice": null,
+    "category": "Tennis",
+    "status": "active",
+    "images": [
+      { "url": "https://sc02.alicdn.com/kf/Ad68fb0d435914512995436a7d96c9a04i.png", "alt": "White Tennis Skirt front" }
+    ],
+    "skus": [
+      { "id": "sku-3-xs", "size": "XS", "color": "White", "stock": 12 },
+      { "id": "sku-3-s",  "size": "S",  "color": "White", "stock": 22 },
+      { "id": "sku-3-m",  "size": "M",  "color": "White", "stock": 28 },
+      { "id": "sku-3-l",  "size": "L",  "color": "White", "stock": 18 },
+      { "id": "sku-3-xl", "size": "XL", "color": "White", "stock": 10 }
+    ],
+    "rating": 4.7,
+    "createdAt": "2026-04-15T00:00:00Z"
+  },
+  {
+    "id": "4",
+    "name": "Pastel Pink Zip-Up Hoodie",
+    "description": "Fitted zip-up hoodie in ultra-soft French terry fabric, perfect for pre and post workout.",
+    "price": 96.00,
+    "comparePrice": null,
+    "category": "Studio",
+    "status": "active",
+    "images": [
+      { "url": "https://sc02.alicdn.com/kf/Ae9bb8e1b53474c089761b98e21bac5eaP.png", "alt": "Pink Zip-Up Hoodie front" }
+    ],
+    "skus": [
+      { "id": "sku-4-xs", "size": "XS", "color": "Pastel Pink", "stock": 6 },
+      { "id": "sku-4-s",  "size": "S",  "color": "Pastel Pink", "stock": 15 },
+      { "id": "sku-4-m",  "size": "M",  "color": "Pastel Pink", "stock": 20 },
+      { "id": "sku-4-l",  "size": "L",  "color": "Pastel Pink", "stock": 12 },
+      { "id": "sku-4-xl", "size": "XL", "color": "Pastel Pink", "stock": 5 }
+    ],
+    "rating": 4.9,
+    "createdAt": "2026-04-15T00:00:00Z"
+  }
+]

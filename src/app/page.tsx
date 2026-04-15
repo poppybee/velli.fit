@@ -3,10 +3,13 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import CategoryCard from '@/components/CategoryCard';
 import ProductCard from '@/components/ProductCard';
-import { categories, trendingProducts } from '@/data/mockData';
+import { categories } from '@/data/mockData';
+import { getProducts } from '@/lib/products';
 import { ArrowRight } from 'lucide-react';
 
 export default function Home() {
+  const allProducts = getProducts();
+  const trendingProducts = allProducts.filter((p) => p.status === 'active').slice(0, 4);
   return (
     <main className="bg-[#0d0d0d] min-h-screen">
       <Navbar />

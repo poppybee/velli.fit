@@ -10,19 +10,23 @@ interface ProductCardProps {
     name: string;
     price: number;
     category: string;
-    image: string;
+    image?: string;
+    images?: { url: string; alt: string }[];
     rating: number;
   };
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const imageUrl = product.images?.[0]?.url || product.image || '';
+  const imageAlt = product.images?.[0]?.alt || product.name;
+
   return (
     <div className="group">
       <Link href={`/product/${product.id}`}>
         <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-gray-50 mb-4">
           <img 
-            src={product.image} 
-            alt={product.name}
+            src={imageUrl} 
+            alt={imageAlt}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute bottom-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg transform translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 hover:bg-emerald-500 hover:text-white text-black">
