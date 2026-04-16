@@ -3,17 +3,21 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import CategoryCard from '@/components/CategoryCard';
 import ProductCard from '@/components/ProductCard';
-import { categories } from '@/data/mockData';
 import { getProducts } from '@/lib/products';
+import { getPagesData } from '@/lib/pages';
 import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Home() {
   const allProducts = getProducts();
   const trendingProducts = allProducts.filter((p) => p.status === 'active').slice(0, 4);
+  const pages = getPagesData();
+  const { hero, categories, brandStory } = pages.home;
+
   return (
     <main className="bg-[#0d0d0d] min-h-screen">
       <Navbar />
-      <Hero />
+      <Hero hero={hero} />
 
       {/* Marquee strip */}
       <div className="bg-emerald-400 text-black py-3 overflow-hidden">
@@ -68,13 +72,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Feature strip — 3 pillars */}
+      {/* Feature strip */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 rounded-3xl overflow-hidden">
           {[
             { num: '01', title: 'Performance Fabric', desc: 'Moisture-wicking, 4-way stretch technology engineered for every movement.' },
             { num: '02', title: 'Body-First Design', desc: 'Ergonomic cuts sculpted by women, for women. Every seam has a purpose.' },
-            { num: '03', title: 'Planet Conscious', desc: 'Recycled yarns and zero-waste production. Style that doesn\'t cost the earth.' },
+            { num: '03', title: 'Planet Conscious', desc: "Recycled yarns and zero-waste production. Style that doesn't cost the earth." },
           ].map((item) => (
             <div key={item.num} className="bg-[#0d0d0d] p-10 md:p-12">
               <span className="text-4xl font-black text-emerald-400/30 mb-6 block">{item.num}</span>
@@ -85,31 +89,37 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Brand Ethos — full bleed */}
-      <section className="relative overflow-hidden">
-        <img
-          src="https://sc02.alicdn.com/kf/A17c219c5f8bb453cabf4d47369a47dc42.png"
-          alt="VELLI brand"
-          className="w-full h-[70vh] object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent flex items-center">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div className="max-w-xl">
-              <p className="text-emerald-400 text-xs font-bold tracking-[0.3em] uppercase mb-5">Our Mission</p>
-              <h2 className="text-5xl md:text-7xl font-black text-white uppercase leading-tight tracking-tighter mb-8">
-                Built for<br />
-                <span className="text-emerald-400">Every Woman.</span>
-              </h2>
-              <p className="text-white/60 text-base md:text-lg mb-10 leading-relaxed">
-                Movement is power. VELLI gear is crafted to move with you — not against you — so you can push further, feel stronger, and look incredible doing it.
-              </p>
-              <button className="px-8 py-4 bg-emerald-400 text-black rounded-full font-black hover:bg-emerald-300 transition-colors uppercase tracking-wide text-sm">
-                Join the VELLI Community
-              </button>
+      {/* Brand Story — from pages.json */}
+      {brandStory.image && (
+        <section className="relative overflow-hidden">
+          <img
+            src={brandStory.image}
+            alt="VELLI brand"
+            className="w-full h-[70vh] object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent flex items-center">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+              <div className="max-w-xl">
+                <p className="text-emerald-400 text-xs font-bold tracking-[0.3em] uppercase mb-5">Our Mission</p>
+                <h2 className="text-5xl md:text-7xl font-black text-white uppercase leading-tight tracking-tighter mb-8">
+                  {brandStory.title.includes('Every Woman') ? (
+                    <>Built for<br /><span className="text-emerald-400">Every Woman.</span></>
+                  ) : brandStory.title}
+                </h2>
+                <p className="text-white/60 text-base md:text-lg mb-10 leading-relaxed">
+                  {brandStory.subtitle}
+                </p>
+                <Link
+                  href={brandStory.buttonLink || '/'}
+                  className="px-8 py-4 bg-emerald-400 text-black rounded-full font-black hover:bg-emerald-300 transition-colors uppercase tracking-wide text-sm inline-block"
+                >
+                  {brandStory.buttonText}
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Footer */}
       <footer className="bg-[#0d0d0d] border-t border-white/5">

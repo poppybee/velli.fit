@@ -4,22 +4,21 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import type { HeroConfig } from '@/lib/pages';
 
-export default function Hero() {
+export default function Hero({ hero }: { hero: HeroConfig }) {
   return (
     <section className="relative h-screen flex items-end overflow-hidden">
-      {/* Full-bleed background */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://sc02.alicdn.com/kf/A56370790ea01488eb613c55e42c73604g.png"
+          src={hero.image}
           alt="VELLI activewear hero"
           className="w-full h-full object-cover object-top"
         />
-        {/* Gradient overlay — dark at bottom, subtle at top */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
       </div>
 
-      {/* Floating badge — top right */}
+      {/* Floating badge */}
       <motion.div
         initial={{ opacity: 0, x: 30 }}
         animate={{ opacity: 1, x: 0 }}
@@ -33,7 +32,7 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      {/* Main copy — bottom left */}
+      {/* Main copy */}
       <div className="relative z-10 w-full px-6 md:px-16 pb-16 md:pb-24">
         <motion.span
           initial={{ opacity: 0, y: 16 }}
@@ -50,8 +49,9 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.15 }}
           className="text-6xl sm:text-8xl md:text-[9rem] font-black leading-[0.9] tracking-tighter text-white uppercase mb-8"
         >
-          MOVE<br />
-          <span className="text-emerald-400">BOLD.</span>
+          {hero.title.includes('BOLD') ? (
+            <>MOVE<br /><span className="text-emerald-400">BOLD.</span></>
+          ) : hero.title}
         </motion.h1>
 
         <motion.p
@@ -60,7 +60,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="text-gray-300 text-base md:text-lg max-w-md mb-10 font-medium leading-relaxed"
         >
-          Performance fabrics that move with you — from studio to street. Built for women who never slow down.
+          {hero.subtitle}
         </motion.p>
 
         <motion.div
@@ -70,10 +70,10 @@ export default function Hero() {
           className="flex flex-col sm:flex-row gap-4"
         >
           <Link
-            href="/product/1"
+            href={hero.buttonLink || '/'}
             className="group inline-flex items-center gap-3 px-8 py-4 bg-emerald-400 text-black font-bold rounded-full hover:bg-emerald-300 transition-all duration-300 text-sm tracking-wide uppercase"
           >
-            Shop the Collection
+            {hero.buttonText}
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </Link>
           <button className="inline-flex items-center gap-2 px-8 py-4 border border-white/30 text-white font-bold rounded-full hover:bg-white/10 transition-all duration-300 text-sm tracking-wide uppercase backdrop-blur-sm">

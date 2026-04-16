@@ -2,10 +2,11 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LayoutGrid, Package, LogOut, ExternalLink } from 'lucide-react';
+import { Package, LogOut, ExternalLink, Layout } from 'lucide-react';
 
 const nav = [
   { href: '/admin/products', label: 'Products', icon: Package },
+  { href: '/admin/pages', label: 'Page Content', icon: Layout },
 ];
 
 export default function AdminSidebar() {
@@ -27,17 +28,20 @@ export default function AdminSidebar() {
       </div>
 
       <nav className="flex-1 px-4 py-6 space-y-1">
-        <Link
-          href="/admin/products"
-          className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
-            pathname.startsWith('/admin/products')
-              ? 'bg-emerald-400/10 text-emerald-400'
-              : 'text-white/50 hover:text-white hover:bg-white/5'
-          }`}
-        >
-          <Package size={16} />
-          Products
-        </Link>
+          {nav.map(({ href, label, icon: Icon }) => (
+          <Link
+            key={href}
+            href={href}
+            className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
+              pathname.startsWith(href)
+                ? 'bg-emerald-400/10 text-emerald-400'
+                : 'text-white/50 hover:text-white hover:bg-white/5'
+            }`}
+          >
+            <Icon size={16} />
+            {label}
+          </Link>
+        ))}
       </nav>
 
       <div className="px-4 py-6 border-t border-white/5 space-y-1">

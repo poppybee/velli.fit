@@ -9,11 +9,12 @@ interface CategoryCardProps {
   name: string;
   image: string;
   description: string;
+  link?: string;
 }
 
-export default function CategoryCard({ id, name, image, description }: CategoryCardProps) {
+export default function CategoryCard({ id, name, image, description, link }: CategoryCardProps) {
   return (
-    <Link href={`/product/${id === 'yoga' ? '1' : '2'}`}>
+    <Link href={link || `/product/${id === 'yoga' ? '1' : '2'}`}>
       <motion.div 
         whileHover={{ y: -10 }}
         className="group relative h-[500px] overflow-hidden rounded-3xl bg-gray-100 cursor-pointer"

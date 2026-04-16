@@ -1,0 +1,51 @@
+{
+  "home": {
+    "hero": {
+      "image": "https://sc02.alicdn.com/kf/A56370790ea01488eb613c55e42c73604g.png",
+      "title": "MOVE BOLD.",
+      "subtitle": "Performance fabrics that move with you — from studio to street. Built for women who never slow down.",
+      "buttonText": "Shop the Collection",
+      "buttonLink": "/product/1"
+    },
+    "categories": [
+      {
+        "id": "yoga",
+        "name": "Yoga",
+        "description": "Flow freely in yoga shorts built for every pose.",
+        "image": "https://sc02.alicdn.com/kf/Ac9392579be89438192ccb830da1ef2abj.png",
+        "link": "/product/1"
+      },
+      {
+        "id": "tennis",
+        "name": "Tennis",
+        "description": "Serve in style with our pleated tennis skirt edit.",
+        "image": "https://sc02.alicdn.com/kf/A464b4f8e98c2425b890be24e0f47c4c6z.png",
+        "link": "/product/3"
+      },
+      {
+        "id": "studio",
+        "name": "Studio",
+        "description": "Zip-up hoodies and sets made for the studio.",
+        "image": "https://sc02.alicdn.com/kf/Af6afeb3076884427b9a2b83fdf21e1a52.png",
+        "link": "/product/4"
+      }
+    ],
+    "brandStory": {
+      "image": "https://sc02.alicdn.com/kf/A17c219c5f8bb453cabf4d47369a47dc42.png",
+      "title": "Built for Every Woman.",
+      "subtitle": "Movement is power. VELLI gear is crafted to move with you — not against you — so you can push further, feel stronger, and look incredible doing it.",
+      "buttonText": "Join the VELLI Community",
+      "buttonLink": "/"
+    }
+  },
+  "product": {
+    "banners": [
+      {
+        "id": "banner-1",
+        "image": "https://sc02.alicdn.com/kf/A56370790ea01488eb613c55e42c73604g.png",
+        "title": "Spring Collection",
+        "link": "/product/1"
+      }
+    ]
+  }
+}
