@@ -45,7 +45,7 @@ export default function AdminProducts() {
   };
 
   const totalStock = (product: Product) =>
-    product.skus.reduce((sum, s) => sum + s.stock, 0);
+    product.skus?.reduce((sum, s) => sum + s.stock, 0) || 0;
 
   const filteredProducts = products.filter(p => filter === 'all' || p.status === filter);
 
@@ -111,7 +111,7 @@ export default function AdminProducts() {
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-lg overflow-hidden bg-white/10 flex-shrink-0">
-                        {product.images[0] ? (
+                        {product.images && product.images[0] ? (
                           <img src={product.images[0].url} alt={product.images[0].alt} className="w-full h-full object-cover" />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center">
@@ -178,4 +178,5 @@ export default function AdminProducts() {
       )}
     </div>
   );
+}
 }
