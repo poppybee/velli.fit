@@ -319,26 +319,22 @@ export default function ProductForm({ initialData }: { initialData?: Product & {
       </section>
 
       {/* Actions */}
-      <div className="flex gap-3">
-        <button
-          type="submit"
-          disabled={saving}
-          className="px-8 py-3 bg-emerald-400 text-black font-black rounded-xl hover:bg-emerald-300 transition-colors text-sm uppercase tracking-wide disabled:opacity-50"
-        >
-          {saving ? 'Saving...' : isEdit ? 'Save Changes' : 'Create Product'}
-        </button>
-        <button
-          type="button"
-          onClick={() => router.back()}
-          className="px-8 py-3 bg-white/5 text-white font-bold rounded-xl hover:bg-white/10 transition-colors text-sm"
-        >
-          Cancel
-        </button>
-      </div>
-    </form>
-  );
-}
-ont-bold rounded-xl hover:bg-white/20 transition-colors text-sm uppercase tracking-wide disabled:opacity-50"
+      <div className="flex items-center justify-between pt-4 border-t border-white/5">
+        <div className="flex gap-3">
+          <button
+            type="button"
+            disabled={saving}
+            onClick={() => handleSubmit(null as any, 'active')}
+            className="px-8 py-3 bg-emerald-400 text-black font-black rounded-xl hover:bg-emerald-300 transition-colors text-sm uppercase tracking-wide disabled:opacity-50"
+          >
+            {saving ? 'Saving...' : isEdit ? (form.status === 'active' ? 'Save Changes' : 'Publish Product') : 'Publish Product'}
+          </button>
+          
+          <button
+            type="button"
+            disabled={saving}
+            onClick={() => handleSubmit(null as any, 'draft')}
+            className="px-8 py-3 bg-white/10 text-white font-bold rounded-xl hover:bg-white/20 transition-colors text-sm uppercase tracking-wide disabled:opacity-50"
           >
             {saving ? 'Saving...' : isEdit ? 'Save as Draft' : 'Save as Draft'}
           </button>

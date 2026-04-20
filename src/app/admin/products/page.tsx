@@ -17,6 +17,7 @@ type Product = {
 export default function AdminProducts() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState<'all' | 'active' | 'draft'>('all');
 
   const fetchProducts = async () => {
     const res = await fetch('/api/products');
@@ -45,6 +46,8 @@ export default function AdminProducts() {
 
   const totalStock = (product: Product) =>
     product.skus.reduce((sum, s) => sum + s.stock, 0);
+
+  const filteredProducts = products.filter(p => filter === 'all' || p.status === filter);
 
   return (
     <div>
@@ -81,11 +84,13 @@ export default function AdminProducts() {
       {/* Table */}
       {loading ? (
         <div className="text-white/30 text-sm">Loading...</div>
-      ) : products.length === 0 ? (
+      ) : filteredProducts.length === 0 ? (
         <div className="text-center py-24 text-white/20">
           <Package size={48} className="mx-auto mb-4 opacity-30" />
-          <p className="text-lg font-medium">No products yet</p>
-          <Link href="/admin/products/new" className="text-emerald-400 text-sm mt-2 inline-block hover:underline">Add your first product</Link>
+          <p className="text-lg font-medium">No products found</p>
+          {filter !== 'all' && (
+            <button onClick={() => setFilter('all')} className="text-emerald-400 text-sm mt-2 hover:underline">Clear filters</button>
+          )}
         </div>
       ) : (
         <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
@@ -101,7 +106,7 @@ export default function AdminProducts() {
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => (
+              {filteredProducts.map((product) => (
                 <tr key={product.id} className="border-b border-white/5 last:border-0 hover:bg-white/[0.02] transition-colors">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
