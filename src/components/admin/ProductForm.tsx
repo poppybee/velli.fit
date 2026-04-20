@@ -29,7 +29,7 @@ const defaultProduct: Product = {
   price: 0,
   comparePrice: null,
   category: 'Yoga',
-  status: 'active',
+  status: 'draft',
   images: [],
   skus: [],
   rating: 5.0,
@@ -82,22 +82,25 @@ export default function ProductForm({ initialData }: { initialData?: Product & {
     set('skus', skus);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent, statusOverride?: 'active' | 'draft') => {
+    if (e) e.preventDefault();
     setSaving(true);
+
+    const dataToSave = statusOverride ? { ...form, status: statusOverride } : form;
+
     const url = isEdit ? `/api/products/${initialData.id}` : '/api/products';
     const method = isEdit ? 'PUT' : 'POST';
     await fetch(url, {
       method,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
+      body: JSON.stringify(dataToSave),
     });
     router.push('/admin/products');
     router.refresh();
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-4xl space-y-8">
+    <form onSubmit={(e) => handleSubmit(e)} className="max-w-4xl space-y-8">
 
       {/* Basic Info */}
       <section className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-5">
@@ -132,11 +135,16 @@ export default function ProductForm({ initialData }: { initialData?: Product & {
             </select>
           </div>
           <div>
-            <label className="label">Status</label>
-            <select className="input" value={form.status} onChange={(e) => set('status', e.target.value as 'active' | 'draft')}>
-              <option value="active">Active</option>
-              <option value="draft">Draft</option>
-            </select>
+            <label className="label">Rating (Display Only)</label>
+            <input
+              className="input"
+              type="number"
+              min="0"
+              max="5"
+              step="0.1"
+              value={form.rating}
+              onChange={(e) => set('rating', parseFloat(e.target.value))}
+            />
           </div>
         </div>
       </section>
@@ -323,6 +331,23 @@ export default function ProductForm({ initialData }: { initialData?: Product & {
           type="button"
           onClick={() => router.back()}
           className="px-8 py-3 bg-white/5 text-white font-bold rounded-xl hover:bg-white/10 transition-colors text-sm"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  );
+}
+ont-bold rounded-xl hover:bg-white/20 transition-colors text-sm uppercase tracking-wide disabled:opacity-50"
+          >
+            {saving ? 'Saving...' : isEdit ? 'Save as Draft' : 'Save as Draft'}
+          </button>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => router.back()}
+          className="px-8 py-3 text-white/40 hover:text-white font-bold rounded-xl transition-colors text-sm"
         >
           Cancel
         </button>

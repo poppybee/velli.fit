@@ -3,8 +3,11 @@
 import React from 'react';
 import { ShoppingBag, User, Search, Menu } from 'lucide-react';
 import Link from 'next/link';
+import { useCart } from '@/context/CartContext';
 
 export default function Navbar() {
+  const { totalItems } = useCart();
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-md border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -29,7 +32,11 @@ export default function Navbar() {
             </Link>
             <Link href="/cart" className="text-white/60 hover:text-white transition-colors p-2 relative">
               <ShoppingBag size={18} />
-              <span className="absolute top-1 right-1 w-2 h-2 bg-emerald-400 rounded-full"></span>
+              {totalItems > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] bg-emerald-400 text-black text-[10px] font-black rounded-full flex items-center justify-center px-1 leading-none">
+                  {totalItems > 99 ? '99+' : totalItems}
+                </span>
+              )}
             </Link>
             <button className="md:hidden text-white/60 p-2">
               <Menu size={18} />

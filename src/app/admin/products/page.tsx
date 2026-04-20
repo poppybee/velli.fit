@@ -56,11 +56,26 @@ export default function AdminProducts() {
         </div>
         <Link
           href="/admin/products/new"
-          className="flex items-center gap-2 px-5 py-2.5 bg-emerald-400 text-black font-bold rounded-xl hover:bg-emerald-300 transition-colors text-sm"
+          className="flex items-center gap-2 px-5 py-2.5 bg-emerald-400 text-black font-bold rounded-xl hover:bg-emerald-300 transition-colors text-sm uppercase tracking-widest"
         >
           <Plus size={16} />
           Add Product
         </Link>
+      </div>
+
+      {/* Tabs / Filters */}
+      <div className="flex gap-1 bg-white/5 p-1 rounded-xl border border-white/10 mb-6 w-fit">
+        {(['all', 'active', 'draft'] as const).map((t) => (
+          <button
+            key={t}
+            onClick={() => setFilter(t)}
+            className={`px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-lg transition-all ${
+              filter === t ? 'bg-white/10 text-white' : 'text-white/30 hover:text-white/60'
+            }`}
+          >
+            {t}
+          </button>
+        ))}
       </div>
 
       {/* Table */}
@@ -100,7 +115,12 @@ export default function AdminProducts() {
                         )}
                       </div>
                       <div>
-                        <p className="text-white font-medium text-sm">{product.name}</p>
+                        <div className="flex items-center gap-2">
+                          <p className="text-white font-medium text-sm">{product.name}</p>
+                          {product.status === 'draft' && (
+                            <span className="px-1.5 py-0.5 bg-white/10 text-white/40 text-[10px] font-black uppercase tracking-widest rounded">Draft</span>
+                          )}
+                        </div>
                         <p className="text-white/30 text-xs">ID: {product.id}</p>
                       </div>
                     </div>

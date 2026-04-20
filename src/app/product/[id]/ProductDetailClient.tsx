@@ -4,13 +4,31 @@ import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import ProductGallery from '@/components/ProductGallery';
 import SizeSelector from '@/components/SizeSelector';
-import { Heart, ShoppingBag, ShieldCheck, Truck, RotateCcw } from 'lucide-react';
+import { Heart, ShoppingBag, ShieldCheck, Truck, RotateCcw, Check } from 'lucide-react';
 import type { Product } from '@/lib/products';
+import { useCart } from '@/context/CartContext';
 
 export default function ProductDetailClient({ product }: { product: Product }) {
   const imageUrls = product.images.map((img) => img.url);
   const sizes = [...new Set(product.skus.map((s) => s.size))];
   const [selectedSize, setSelectedSize] = useState(sizes[0] || 'M');
+  const [added, setAdded] = useState(false);
+  const { addItem } = useCart();
+
+  const handleAddToCart = () => {
+    const sku = product.skus.find((s) => s.size === selectedSize) || product.skus[0];
+    addItem({
+      productId: product.id,
+      name: product.name,
+      price: product.price,
+      size: selectedSize,
+      color: sku?.color,
+      image: imageUrls[0] || '/placeholder.png',
+      quantity: 1,
+    });
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+  };
 
   return (
     <main className="bg-white min-h-screen pt-24 pb-12">
@@ -48,9 +66,16 @@ export default function ProductDetailClient({ product }: { product: Product }) {
             />
 
             <div className="flex gap-4 mb-12">
-              <button className="flex-1 h-16 bg-black text-white rounded-2xl font-bold text-lg hover:bg-emerald-600 transition-colors flex items-center justify-center gap-3 uppercase tracking-widest">
-                <ShoppingBag size={20} />
-                Add to Cart
+              <button
+                onClick={handleAddToCart}
+                className={`flex-1 h-16 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-3 uppercase tracking-widest ${
+                  added
+                    ? 'bg-emerald-500 text-white scale-[0.98]'
+                    : 'bg-black text-white hover:bg-emerald-600'
+                }`}
+              >
+                {added ? <Check size={20} /> : <ShoppingBag size={20} />}
+                {added ? 'Added to Cart!' : 'Add to Cart'}
               </button>
               <button className="w-16 h-16 border-2 border-gray-100 rounded-2xl flex items-center justify-center text-gray-400 hover:text-red-500 hover:border-red-100 transition-all">
                 <Heart size={24} />
