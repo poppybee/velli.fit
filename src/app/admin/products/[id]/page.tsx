@@ -3,7 +3,7 @@ import ProductForm from '@/components/admin/ProductForm';
 import { notFound } from 'next/navigation';
 
 export default async function EditProductPage({ params }: { params: { id: string } }) {
-  const product = getProduct(params.id);
+  const product = await getProduct(params.id);
   if (!product) notFound();
 
   return (

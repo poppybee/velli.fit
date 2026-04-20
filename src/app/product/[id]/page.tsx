@@ -3,12 +3,12 @@ import { notFound } from 'next/navigation';
 import ProductDetailClient from './ProductDetailClient';
 
 export async function generateStaticParams() {
-  const products = getProducts();
+  const products = await getProducts();
   return products.map((p) => ({ id: p.id }));
 }
 
 export default async function ProductDetail({ params }: { params: { id: string } }) {
-  const product = getProduct(params.id);
+  const product = await getProduct(params.id);
   if (!product) notFound();
   return <ProductDetailClient product={product} />;
 }

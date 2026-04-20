@@ -90,13 +90,20 @@ export default function ProductForm({ initialData }: { initialData?: Product & {
 
     const url = isEdit ? `/api/products/${initialData.id}` : '/api/products';
     const method = isEdit ? 'PUT' : 'POST';
-    await fetch(url, {
+    const res = await fetch(url, {
       method,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(dataToSave),
     });
-    router.push('/admin/products');
-    router.refresh();
+
+    if (res.ok) {
+      router.push('/admin/products');
+      router.refresh();
+    } else {
+      const err = await res.text();
+      alert(`Failed to save: ${err}`);
+      setSaving(false);
+    }
   };
 
   return (

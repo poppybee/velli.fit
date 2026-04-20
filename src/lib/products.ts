@@ -1,7 +1,4 @@
-import fs from 'fs';
-import path from 'path';
-
-const filePath = path.join(process.cwd(), 'data', 'products.json');
+import { supabase } from './supabase';
 
 export type SKU = {
   id: string;
@@ -29,49 +26,110 @@ export type Product = {
   createdAt: string;
 };
 
-export function getProducts(): Product[] {
-  try {
-    const raw = fs.readFileSync(filePath, 'utf-8');
-    return JSON.parse(raw);
-  } catch {
+// Helper to map DB row to Product type
+function mapRow(row: any): Product {
+  return {
+    id: row.id,
+    name: row.name,
+    description: row.description,
+    price: Number(row.price),
+    comparePrice: row.compare_price ? Number(row.compare_price) : null,
+    category: row.category,
+    status: row.status,
+    images: row.images || [],
+    skus: row.skus || [],
+    rating: Number(row.rating),
+    createdAt: row.created_at,
+  };
+}
+
+export async function getProducts(): Promise<Product[]> {
+  const { data, error } = await supabase
+    .from('products')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Error fetching products:', error);
     return [];
   }
+  return data.map(mapRow);
 }
 
-export function getProduct(id: string): Product | null {
-  const products = getProducts();
-  return products.find((p) => p.id === id) || null;
+export async function getProduct(id: string): Promise<Product | null> {
+  const { data, error } = await supabase
+    .from('products')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error || !data) {
+    console.error('Error fetching product:', error);
+    return null;
+  }
+  return mapRow(data);
 }
 
-export function saveProducts(products: Product[]): void {
-  fs.writeFileSync(filePath, JSON.stringify(products, null, 2), 'utf-8');
+export async function createProduct(data: Omit<Product, 'id' | 'createdAt'>): Promise<Product> {
+  const id = Date.now().toString();
+  const { data: created, error } = await supabase
+    .from('products')
+    .insert({
+      id,
+      name: data.name,
+      description: data.description,
+      price: data.price,
+      compare_price: data.comparePrice,
+      category: data.category,
+      status: data.status,
+      images: data.images,
+      skus: data.skus,
+      rating: data.rating,
+    })
+    .select()
+    .single();
+
+  if (error) {
+    throw new Error(`Error creating product: ${error.message}`);
+  }
+  return mapRow(created);
 }
 
-export function createProduct(data: Omit<Product, 'id' | 'createdAt'>): Product {
-  const products = getProducts();
-  const newProduct: Product = {
-    ...data,
-    id: Date.now().toString(),
-    createdAt: new Date().toISOString(),
-  };
-  products.push(newProduct);
-  saveProducts(products);
-  return newProduct;
+export async function updateProduct(id: string, data: Partial<Product>): Promise<Product | null> {
+  const updateData: any = {};
+  if (data.name !== undefined) updateData.name = data.name;
+  if (data.description !== undefined) updateData.description = data.description;
+  if (data.price !== undefined) updateData.price = data.price;
+  if (data.comparePrice !== undefined) updateData.compare_price = data.comparePrice;
+  if (data.category !== undefined) updateData.category = data.category;
+  if (data.status !== undefined) updateData.status = data.status;
+  if (data.images !== undefined) updateData.images = data.images;
+  if (data.skus !== undefined) updateData.skus = data.skus;
+  if (data.rating !== undefined) updateData.rating = data.rating;
+
+  const { data: updated, error } = await supabase
+    .from('products')
+    .update(updateData)
+    .eq('id', id)
+    .select()
+    .single();
+
+  if (error) {
+    console.error('Error updating product:', error);
+    return null;
+  }
+  return mapRow(updated);
 }
 
-export function updateProduct(id: string, data: Partial<Product>): Product | null {
-  const products = getProducts();
-  const idx = products.findIndex((p) => p.id === id);
-  if (idx === -1) return null;
-  products[idx] = { ...products[idx], ...data };
-  saveProducts(products);
-  return products[idx];
-}
+export async function deleteProduct(id: string): Promise<boolean> {
+  const { error } = await supabase
+    .from('products')
+    .delete()
+    .eq('id', id);
 
-export function deleteProduct(id: string): boolean {
-  const products = getProducts();
-  const filtered = products.filter((p) => p.id !== id);
-  if (filtered.length === products.length) return false;
-  saveProducts(filtered);
+  if (error) {
+    console.error('Error deleting product:', error);
+    return false;
+  }
   return true;
 }

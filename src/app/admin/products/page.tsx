@@ -20,7 +20,7 @@ export default function AdminProducts() {
   const [filter, setFilter] = useState<'all' | 'active' | 'draft'>('all');
 
   const fetchProducts = async () => {
-    const res = await fetch('/api/products');
+    const res = await fetch('/api/products', { cache: 'no-store' });
     const data = await res.json();
     setProducts(data);
     setLoading(false);

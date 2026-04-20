@@ -8,8 +8,8 @@ import { getPagesData } from '@/lib/pages';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
-export default function Home() {
-  const allProducts = getProducts();
+export default async function Home() {
+  const allProducts = await getProducts();
   const trendingProducts = allProducts.filter((p) => p.status === 'active').slice(0, 4);
   const pages = getPagesData();
   const { hero, categories, brandStory } = pages.home;
