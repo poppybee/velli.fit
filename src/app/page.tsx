@@ -1,6 +1,10 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import CategoryCard from '@/components/CategoryCard';
 import ProductCard from '@/components/ProductCard';
 import { getProducts } from '@/lib/products';
